@@ -1,0 +1,96 @@
+mysql> use FSD_tasks
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_fsd_tasks |
++---------------------+
+| books               |
+| borrow_records      |
+| course              |
+| department          |
+| employee            |
+| members             |
+| student             |
++---------------------+
+7 rows in set (0.08 sec)
+
+mysql> select * from student;
++------------+--------+----------------------+------------+-----------+-------+
+| student_id | name   | email                | dob        | course_id | marks |
++------------+--------+----------------------+------------+-----------+-------+
+|          1 | anil   | anil.k@example.com   | 2002-07-15 |       101 |    85 |
+|          2 | sneha  | sneha.r@example.com  | 2001-11-22 |       102 |    78 |
+|          3 | vikram | vikram.s@example.com | 2003-01-30 |       103 |    91 |
+|          4 | divya  | divya.p@example.com  | 2002-04-18 |       101 |    88 |
+|          5 | ravi   | ravi.t@example.com   | 2001-09-05 |       104 |    69 |
++------------+--------+----------------------+------------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where marks>80;
++------------+--------+----------------------+------------+-----------+-------+
+| student_id | name   | email                | dob        | course_id | marks |
++------------+--------+----------------------+------------+-----------+-------+
+|          1 | anil   | anil.k@example.com   | 2002-07-15 |       101 |    85 |
+|          3 | vikram | vikram.s@example.com | 2003-01-30 |       103 |    91 |
+|          4 | divya  | divya.p@example.com  | 2002-04-18 |       101 |    88 |
++------------+--------+----------------------+------------+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from course;
++-----------+--------------------+----------+
+| course_id | course_name        | fee      |
++-----------+--------------------+----------+
+|       101 | Java Programming   | 13440.00 |
+|       102 | Web Development    | 11200.00 |
+|       103 | Data Structures    | 12320.00 |
+|       104 | Database Systems   | 10640.00 |
+|       105 | Python Programming | 12880.00 |
++-----------+--------------------+----------+
+5 rows in set (0.01 sec)
+
+mysql> select * from course order by fee asc;
++-----------+--------------------+----------+
+| course_id | course_name        | fee      |
++-----------+--------------------+----------+
+|       104 | Database Systems   | 10640.00 |
+|       102 | Web Development    | 11200.00 |
+|       103 | Data Structures    | 12320.00 |
+|       105 | Python Programming | 12880.00 |
+|       101 | Java Programming   | 13440.00 |
++-----------+--------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from course where course_name like 'j%';
++-----------+------------------+----------+
+| course_id | course_name      | fee      |
++-----------+------------------+----------+
+|       101 | Java Programming | 13440.00 |
++-----------+------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++--------+-------+-----------+---------+------------+---------------+
+| emp_id | ename | job       | salary  | hiredate   | department_id |
++--------+-------+-----------+---------+------------+---------------+
+|    101 | Ravi  | Manager   | 6000.00 | 1981-03-20 |             1 |
+|    102 | Manoj | Salesman  | 2200.00 | 1981-06-01 |             1 |
+|    103 | Rekha | HR        | 3000.00 | 1982-07-11 |             2 |
+|    104 | Anu   | Salesman  | 2100.00 | 1981-01-10 |             1 |
+|    105 | Sunil | Developer | 5500.00 | 1983-04-12 |             3 |
+|    106 | Priya | Analyst   | 4800.00 | 1984-11-23 |             2 |
++--------+-------+-----------+---------+------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where job ='salesman' and salary>2000;
++--------+-------+----------+---------+------------+---------------+
+| emp_id | ename | job      | salary  | hiredate   | department_id |
++--------+-------+----------+---------+------------+---------------+
+|    102 | Manoj | Salesman | 2200.00 | 1981-06-01 |             1 |
+|    104 | Anu   | Salesman | 2100.00 | 1981-01-10 |             1 |
++--------+-------+----------+---------+------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> Terminal close -- exit!

@@ -1,0 +1,440 @@
+mysql> create database kg;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> create table student(
+    -> name varchar(15),
+    -> id int);
+ERROR 1046 (3D000): No database selected
+mysql> use kg
+Database changed
+mysql> create table student(
+    -> name varchar(15),
+    -> id int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(15) | YES  |     | NULL    |       |
+| id    | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.08 sec)
+
+mysql> Terminal close -- exit!
+mysql> create a database kgcas
+    -> create a database kgcas;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a database kgcas
+create a database kgcas' at line 1
+mysql> create database kgcas;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> create table studentprofile(
+    -> Rollno int,
+    -> Name varchar(50),
+    -> dob DATE,
+    -> Department varchar(40
+    -> )
+    -> ,
+    -> city varchar
+    -> 
+    -> (40));
+ERROR 1046 (3D000): No database selected
+mysql> create table studentprofile(
+    -> Rollno int,
+    -> Name varchar(50),
+    -> Dob DATE,
+    -> Department varchar(40),
+    -> city varchar(40));
+ERROR 1046 (3D000): No database selected
+mysql> use kgcas
+Database changed
+mysql> create table studentprofile(
+    -> Rollno int,
+    -> Name varchar(50),
+    -> dob DATE,
+    -> Department varchar(40),
+    -> city varchar(40));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> create table studentmark(
+    -> Rollno int,
+    -> Name varchar(50),
+    -> Mark1 int,
+    -> Mark2 int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into studentprofile values(1,'Angel','2006-02-06','CT','Coimbatore');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from studentprofile;
++--------+-------+------------+------------+------------+
+| Rollno | Name  | dob        | Department | city       |
++--------+-------+------------+------------+------------+
+|      1 | Angel | 2006-02-06 | CT         | Coimbatore |
++--------+-------+------------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into studentprofile values(2,'Vihasini','2006-06-23','CT','Coimbatore'),(3,'Daks','2005-12-23','CT','Coimbatore'),(4,'Sree','2005-06-01','CT','Coimbatore'),(5,'Bhava','2006-07-11','CT','Coimbatore');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentprofile;
++--------+----------+------------+------------+------------+
+| Rollno | Name     | dob        | Department | city       |
++--------+----------+------------+------------+------------+
+|      1 | Angel    | 2006-02-06 | CT         | Coimbatore |
+|      2 | Vihasini | 2006-06-23 | CT         | Coimbatore |
+|      3 | Daks     | 2005-12-23 | CT         | Coimbatore |
+|      4 | Sree     | 2005-06-01 | CT         | Coimbatore |
+|      5 | Bhava    | 2006-07-11 | CT         | Coimbatore |
++--------+----------+------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into studentmark values(1,'Angel',87,98);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentmark values(2,'Vihasini',89,99),(3,'Daks',92,87),(4,'Sree',89,91),(5,'Bhava',77,81);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+
+| Rollno | Name     | Mark1 | Mark2 |
++--------+----------+-------+-------+
+|      1 | Angel    |    87 |    98 |
+|      2 | Vihasini |    89 |    99 |
+|      3 | Daks     |    92 |    87 |
+|      4 | Sree     |    89 |    91 |
+|      5 | Bhava    |    77 |    81 |
++--------+----------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table studentprofile 
+    -> rename column dob to dateofbirth;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+
+| Rollno | Name     | Mark1 | Mark2 |
++--------+----------+-------+-------+
+|      1 | Angel    |    87 |    98 |
+|      2 | Vihasini |    89 |    99 |
+|      3 | Daks     |    92 |    87 |
+|      4 | Sree     |    89 |    91 |
+|      5 | Bhava    |    77 |    81 |
++--------+----------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from studentprofile;
++--------+----------+-------------+------------+------------+
+| Rollno | Name     | dateofbirth | Department | city       |
++--------+----------+-------------+------------+------------+
+|      1 | Angel    | 2006-02-06  | CT         | Coimbatore |
+|      2 | Vihasini | 2006-06-23  | CT         | Coimbatore |
+|      3 | Daks     | 2005-12-23  | CT         | Coimbatore |
+|      4 | Sree     | 2005-06-01  | CT         | Coimbatore |
+|      5 | Bhava    | 2006-07-11  | CT         | Coimbatore |
++--------+----------+-------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc studentprofile;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Rollno      | int         | YES  |     | NULL    |       |
+| Name        | varchar(50) | YES  |     | NULL    |       |
+| dateofbirth | date        | YES  |     | NULL    |       |
+| Department  | varchar(40) | YES  |     | NULL    |       |
+| city        | varchar(40) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc studentmark;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Rollno | int         | YES  |     | NULL    |       |
+| Name   | varchar(50) | YES  |     | NULL    |       |
+| Mark1  | int         | YES  |     | NULL    |       |
+| Mark2  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_kgcas |
++-----------------+
+| studentmark     |
+| studentprofile  |
++-----------------+
+2 rows in set (0.04 sec)
+
+mysql> alter table marks add column total int;
+ERROR 1146 (42S02): Table 'kgcas.marks' doesn't exist
+mysql> alter table marks add column total int;
+ERROR 1146 (42S02): Table 'kgcas.marks' doesn't exist
+mysql> alter table marks
+    -> add column total int;
+ERROR 1146 (42S02): Table 'kgcas.marks' doesn't exist
+mysql> alter table studentmark 
+    -> add column total int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | Angel    |    87 |    98 |  NULL |
+|      2 | Vihasini |    89 |    99 |  NULL |
+|      3 | Daks     |    92 |    87 |  NULL |
+|      4 | Sree     |    89 |    91 |  NULL |
+|      5 | Bhava    |    77 |    81 |  NULL |
++--------+----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update studentmark
+    -> set total = mark1 + mark2;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | Angel    |    87 |    98 |   185 |
+|      2 | Vihasini |    89 |    99 |   188 |
+|      3 | Daks     |    92 |    87 |   179 |
+|      4 | Sree     |    89 |    91 |   180 |
+|      5 | Bhava    |    77 |    81 |   158 |
++--------+----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> delete from studentprofile where sree=4;
+ERROR 1054 (42S22): Unknown column 'sree' in 'where clause'
+mysql> delete from studentprofile where Rollno=4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studentprofile;
++--------+----------+-------------+------------+------------+
+| Rollno | Name     | dateofbirth | Department | city       |
++--------+----------+-------------+------------+------------+
+|      1 | Angel    | 2006-02-06  | CT         | Coimbatore |
+|      2 | Vihasini | 2006-06-23  | CT         | Coimbatore |
+|      3 | Daks     | 2005-12-23  | CT         | Coimbatore |
+|      5 | Bhava    | 2006-07-11  | CT         | Coimbatore |
++--------+----------+-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studentprofile;
++--------+----------+-------------+------------+------------+
+| Rollno | Name     | dateofbirth | Department | city       |
++--------+----------+-------------+------------+------------+
+|      1 | Angel    | 2006-02-06  | CT         | Coimbatore |
+|      2 | Vihasini | 2006-06-23  | CT         | Coimbatore |
+|      3 | Daks     | 2005-12-23  | CT         | Coimbatore |
+|      5 | Bhava    | 2006-07-11  | CT         | Coimbatore |
++--------+----------+-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | Angel    |    87 |    98 |   185 |
+|      2 | Vihasini |    89 |    99 |   188 |
+|      3 | Daks     |    92 |    87 |   179 |
+|      4 | Sree     |    89 |    91 |   180 |
+|      5 | Bhava    |    77 |    81 |   158 |
++--------+----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> alter table studentmark
+    -> add column average decimal(5,2),
+    -> add column grade varchar(10);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |    NULL | NULL  |
+|      2 | Vihasini |    89 |    99 |   188 |    NULL | NULL  |
+|      3 | Daks     |    92 |    87 |   179 |    NULL | NULL  |
+|      4 | Sree     |    89 |    91 |   180 |    NULL | NULL  |
+|      5 | Bhava    |    77 |    81 |   158 |    NULL | NULL  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> set average =total/2;
+ERROR 1193 (HY000): Unknown system variable 'average'
+mysql>  update studentmark set average =total/2;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | NULL  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | NULL  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | NULL  |
+|      4 | Sree     |    89 |    91 |   180 |   90.00 | NULL  |
+|      5 | Bhava    |    77 |    81 |   158 |   79.00 | NULL  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update studentmark set mark1=55 where Name='Bhava';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | NULL  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | NULL  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | NULL  |
+|      4 | Sree     |    89 |    91 |   180 |   90.00 | NULL  |
+|      5 | Bhava    |    55 |    81 |   158 |   79.00 | NULL  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update studentmark set mark2=35 where Name='sree';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update studentmark set mark2=33 where Name='Bhava';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | NULL  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | NULL  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | NULL  |
+|      4 | Sree     |    89 |    35 |   180 |   90.00 | NULL  |
+|      5 | Bhava    |    55 |    33 |   158 |   79.00 | NULL  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>  update studentmark set average =total/2;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 5  Changed: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | NULL  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | NULL  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | NULL  |
+|      4 | Sree     |    89 |    35 |   180 |   90.00 | NULL  |
+|      5 | Bhava    |    55 |    33 |   158 |   79.00 | NULL  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table studentmark
+    -> add column average decimal(5,2),
+    -> add column grade varchar(10);
+ERROR 1060 (42S21): Duplicate column name 'average'
+mysql> alter table studentmark
+    -> add column average decimal(5,2),
+    -> add column grade varchar(10);
+ERROR 1060 (42S21): Duplicate column name 'average'
+mysql> set average =total/2;
+ERROR 1193 (HY000): Unknown system variable 'average'
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | NULL  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | NULL  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | NULL  |
+|      4 | Sree     |    89 |    35 |   180 |   90.00 | NULL  |
+|      5 | Bhava    |    55 |    33 |   158 |   79.00 | NULL  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update   studentmark
+    -> set grade=IF(mark1>40 AND mark2>40,'pass','fail');
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | pass  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | pass  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | pass  |
+|      4 | Sree     |    89 |    35 |   180 |   90.00 | fail  |
+|      5 | Bhava    |    55 |    33 |   158 |   79.00 | fail  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update   studentmark
+    -> set grade=case
+    -> when mark1>40 AND mark2>40 then'pass'
+    -> else'fail'
+    -> end;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 5  Changed: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+---------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | average | grade |
++--------+----------+-------+-------+-------+---------+-------+
+|      1 | Angel    |    87 |    98 |   185 |   92.50 | pass  |
+|      2 | Vihasini |    89 |    99 |   188 |   94.00 | pass  |
+|      3 | Daks     |    92 |    87 |   179 |   89.50 | pass  |
+|      4 | Sree     |    89 |    35 |   180 |   90.00 | fail  |
+|      5 | Bhava    |    55 |    33 |   158 |   79.00 | fail  |
++--------+----------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table studentmark drop column average;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentmark;
++--------+----------+-------+-------+-------+-------+
+| Rollno | Name     | Mark1 | Mark2 | total | grade |
++--------+----------+-------+-------+-------+-------+
+|      1 | Angel    |    87 |    98 |   185 | pass  |
+|      2 | Vihasini |    89 |    99 |   188 | pass  |
+|      3 | Daks     |    92 |    87 |   179 | pass  |
+|      4 | Sree     |    89 |    35 |   180 | fail  |
+|      5 | Bhava    |    55 |    33 |   158 | fail  |
++--------+----------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> truncate table studentprofile;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> select * from studentprofile;
+Empty set (0.00 sec)
+
+mysql> truncate table studentmark;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from studentmark;
+Empty set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from studentmark;
+Empty set (0.00 sec)
+
+mysql> Terminal close -- exit!

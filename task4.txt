@@ -1,0 +1,140 @@
+mysql> use FSD_tasks
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_fsd_tasks |
++---------------------+
+| books               |
+| borrow_records      |
+| course              |
+| department          |
+| employee            |
+| members             |
+| student             |
++---------------------+
+7 rows in set (0.03 sec)
+
+mysql> select * from employee;
++--------+-------+-----------+---------+------------+---------------+
+| emp_id | ename | job       | salary  | hiredate   | department_id |
++--------+-------+-----------+---------+------------+---------------+
+|    101 | Ravi  | Manager   | 6000.00 | 1981-03-20 |             1 |
+|    102 | Manoj | Salesman  | 2200.00 | 1981-06-01 |             1 |
+|    103 | Rekha | HR        | 3000.00 | 1982-07-11 |             2 |
+|    104 | Anu   | Salesman  | 2100.00 | 1981-01-10 |             1 |
+|    105 | Sunil | Developer | 5500.00 | 1983-04-12 |             3 |
+|    106 | Priya | Analyst   | 4800.00 | 1984-11-23 |             2 |
++--------+-------+-----------+---------+------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select e.ename, e.hiredate, d.department_name
+    -> from employee e
+    -> join department d on e.department_id = d.department_id
+    -> where year(hiredate) = 1981 and month(hiredate) <= 6
+    -> 
+    -> ;
++-------+------------+-----------------+
+| ename | hiredate   | department_name |
++-------+------------+-----------------+
+| Ravi  | 1981-03-20 | Finance         |
+| Manoj | 1981-06-01 | Finance         |
+| Anu   | 1981-01-10 | Finance         |
++-------+------------+-----------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from course
+    -> ;
++-----------+--------------------+----------+
+| course_id | course_name        | fee      |
++-----------+--------------------+----------+
+|       101 | Java Programming   | 13440.00 |
+|       102 | Web Development    | 11200.00 |
+|       103 | Data Structures    | 12320.00 |
+|       104 | Database Systems   | 10640.00 |
+|       105 | Python Programming | 12880.00 |
++-----------+--------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select c.course_name, s.name, c.fee
+    -> from course c
+    -> join student s on c.course_id = s.course_id
+    -> where c.fee >;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> select c.course_name, s.name, c.fee
+    -> from course c
+    -> join student s on c.course_id = s.course_id
+    -> where c.fee > 10000;
++------------------+--------+----------+
+| course_name      | name   | fee      |
++------------------+--------+----------+
+| Java Programming | anil   | 13440.00 |
+| Java Programming | divya  | 13440.00 |
+| Web Development  | sneha  | 11200.00 |
+| Data Structures  | vikram | 12320.00 |
+| Database Systems | ravi   | 10640.00 |
++------------------+--------+----------+
+5 rows in set (0.01 sec)
+
+mysql> select * from employee;
++--------+-------+-----------+---------+------------+---------------+
+| emp_id | ename | job       | salary  | hiredate   | department_id |
++--------+-------+-----------+---------+------------+---------------+
+|    101 | Ravi  | Manager   | 6000.00 | 1981-03-20 |             1 |
+|    102 | Manoj | Salesman  | 2200.00 | 1981-06-01 |             1 |
+|    103 | Rekha | HR        | 3000.00 | 1982-07-11 |             2 |
+|    104 | Anu   | Salesman  | 2100.00 | 1981-01-10 |             1 |
+|    105 | Sunil | Developer | 5500.00 | 1983-04-12 |             3 |
+|    106 | Priya | Analyst   | 4800.00 | 1984-11-23 |             2 |
++--------+-------+-----------+---------+------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select d.department_name, d.location, count(e.job) as job_count
+    -> from department d
+    -> join employee e on d.department_id = e.department_id
+    -> group by d.department_name, d.location;
++-----------------+-----------+-----------+
+| department_name | location  | job_count |
++-----------------+-----------+-----------+
+| Finance         | Chennai   |         3 |
+| IT              | Bangalore |         2 |
+| Marketing       | Mumbai    |         1 |
++-----------------+-----------+-----------+
+3 rows in set (0.01 sec)
+
+mysql> select * from department;
++---------------+-----------------+-----------+
+| department_id | department_name | location  |
++---------------+-----------------+-----------+
+|             1 | Finance         | Chennai   |
+|             2 | IT              | Bangalore |
+|             3 | Marketing       | Mumbai    |
+|             4 | HR              | Delhi     |
+|             5 | Sales           | Hyderabad |
++---------------+-----------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++--------+-------+-----------+---------+------------+---------------+
+| emp_id | ename | job       | salary  | hiredate   | department_id |
++--------+-------+-----------+---------+------------+---------------+
+|    101 | Ravi  | Manager   | 6000.00 | 1981-03-20 |             1 |
+|    102 | Manoj | Salesman  | 2200.00 | 1981-06-01 |             1 |
+|    103 | Rekha | HR        | 3000.00 | 1982-07-11 |             2 |
+|    104 | Anu   | Salesman  | 2100.00 | 1981-01-10 |             1 |
+|    105 | Sunil | Developer | 5500.00 | 1983-04-12 |             3 |
+|    106 | Priya | Analyst   | 4800.00 | 1984-11-23 |             2 |
++--------+-------+-----------+---------+------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee order by salary desc limit 1 offset 2;
++--------+-------+---------+---------+------------+---------------+
+| emp_id | ename | job     | salary  | hiredate   | department_id |
++--------+-------+---------+---------+------------+---------------+
+|    106 | Priya | Analyst | 4800.00 | 1984-11-23 |             2 |
++--------+-------+---------+---------+------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> Terminal close -- exit!
