@@ -1,0 +1,839 @@
+mysql> use task_fsd;
+Database changed
+mysql> show tables;
+Empty set (0.06 sec)
+
+mysql> create table student (
+    ->     studentid int primary key,
+    ->     name varchar(100),
+    ->     age int
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> desc student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| studentid | int          | NO   | PRI | NULL    |       |
+| name      | varchar(100) | YES  |     | NULL    |       |
+| age       | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+
+mysql> insert into student values (1, 'Asha', 21), (2, 'Ravi', 22), (3, 'Mina', 23), (4, 'Karan', 20), (5, 'Lata', 22);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++-----------+-------+------+
+| studentid | name  | age  |
++-----------+-------+------+
+|         1 | Asha  |   21 |
+|         2 | Ravi  |   22 |
+|         3 | Mina  |   23 |
+|         4 | Karan |   20 |
+|         5 | Lata  |   22 |
++-----------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> create table course (
+    ->     courseid int primary key,
+    ->     title varchar(100),
+    ->     fee decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into course values (101, 'Math', 5000), (102, 'Physics', 6000), (103, 'Chemistry', 5500), (104, 'Biology', 5800), (105, 'English', 5300);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from course;
++----------+-----------+---------+
+| courseid | title     | fee     |
++----------+-----------+---------+
+|      101 | Math      | 5000.00 |
+|      102 | Physics   | 6000.00 |
+|      103 | Chemistry | 5500.00 |
+|      104 | Biology   | 5800.00 |
+|      105 | English   | 5300.00 |
++----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update course set fee = 6200 where courseid = 102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from course;
++----------+-----------+---------+
+| courseid | title     | fee     |
++----------+-----------+---------+
+|      101 | Math      | 5000.00 |
+|      102 | Physics   | 6200.00 |
+|      103 | Chemistry | 5500.00 |
+|      104 | Biology   | 5800.00 |
+|      105 | English   | 5300.00 |
++----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> create table book (
+    ->     bookid int primary key,
+    ->     title varchar(100),
+    ->     author varchar(100)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc book;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| bookid | int          | NO   | PRI | NULL    |       |
+| title  | varchar(100) | YES  |     | NULL    |       |
+| author | varchar(100) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into book values (1, 'Data Science', 'Angel'), (2, 'SQL Basics', 'Kumar'), (3, 'AI Guide', 'Latha'),(4,'java','shiva'),(5,'python','Adhi');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from book;
++--------+--------------+--------+
+| bookid | title        | author |
++--------+--------------+--------+
+|      1 | Data Science | Angel  |
+|      2 | SQL Basics   | Kumar  |
+|      3 | AI Guide     | Latha  |
+|      4 | java         | shiva  |
+|      5 | python       | Adhi   |
++--------+--------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> create table member (
+    ->     memberid int primary key,
+    ->     name varchar(100),
+    ->     joindate date
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc member;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| memberid | int          | NO   | PRI | NULL    |       |
+| name     | varchar(100) | YES  |     | NULL    |       |
+| joindate | date         | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into member (member_id, name, join_date) values
+    ->   (1, 'pranav',   '2024-01-10'),
+    ->   (2, 'divya',    '2024-01-12'),
+    ->   (3, 'asha',     '2024-02-05'),
+    ->   (4, 'rohan',    '2024-03-15'),
+    ->   (5, 'meera',    '2024-04-01');
+ERROR 1054 (42S22): Unknown column 'member_id' in 'field list'
+mysql> insert into member (memberid,name, join_date) values
+    -> (1, 'pranav',   '2024-01-10'),
+    -> (2, 'divya',    '2024-01-12'),
+    -> (3, 'asha',     '2024-02-05'),
+    -> (4, 'rohan',    '2024-03-15'),
+    ->   (5, 'meera',    '2024-04-01');
+ERROR 1054 (42S22): Unknown column 'join_date' in 'field list'
+mysql> insert into member (memberid,name, joindate) values
+    -> (1, 'pranav',   '2024-01-10'),
+    -> (2, 'divya',    '2024-01-12'),
+    -> (3, 'asha',     '2024-02-05'),
+    -> (4, 'rohan',    '2024-03-15'),
+    ->   (5, 'meera',    '2024-04-01');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from member;
++----------+--------+------------+
+| memberid | name   | joindate   |
++----------+--------+------------+
+|        1 | pranav | 2024-01-10 |
+|        2 | divya  | 2024-01-12 |
+|        3 | asha   | 2024-02-05 |
+|        4 | rohan  | 2024-03-15 |
+|        5 | meera  | 2024-04-01 |
++----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table loan (
+    ->     loanid int primary key,
+    ->     bookid int,
+    ->     memberid int,
+    ->     loandate date,
+    ->     foreign key (bookid) references book(bookid),
+    ->     foreign key (memberid) references member(memberid)
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> insert into loan (loanid, bookid, memberid, loandate) values
+    ->   (1, 2, 1, '2025-06-20'),
+    ->   (2, 3, 2, '2025-06-22'),
+    ->   (3, 5, 4, '2025-06-28');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from loan;
++--------+--------+----------+------------+
+| loanid | bookid | memberid | loandate   |
++--------+--------+----------+------------+
+|      1 |      2 |        1 | 2025-06-20 |
+|      2 |      3 |        2 | 2025-06-22 |
+|      3 |      5 |        4 | 2025-06-28 |
++--------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table author (
+    ->     authorid int primary key,
+    ->     name varchar(100)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into author (authorid, name) values
+    ->   (1, 'J.K. Rowling'),
+    ->   (2, 'George Orwell'),
+    ->   (3, 'J.R.R. Tolkien'),
+    ->   (4, 'Agatha Christie'),
+    ->   (5, 'Leo Tolstoy');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from author;
++----------+-----------------+
+| authorid | name            |
++----------+-----------------+
+|        1 | J.K. Rowling    |
+|        2 | George Orwell   |
+|        3 | J.R.R. Tolkien  |
+|        4 | Agatha Christie |
+|        5 | Leo Tolstoy     |
++----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> create table publisher (
+    ->     publisherid int primary key,
+    ->     name varchar(100)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into publisher (publisherid, name) values
+    ->   (1, 'Bloomsbury Publishing'),
+    ->   (2, 'Secker & Warburg'),
+    ->   (3, 'HarperCollins'),
+    ->   (4, 'Collins Crime Club'),
+    ->   (5, 'The Russian Messenger');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from publisher;
++-------------+-----------------------+
+| publisherid | name                  |
++-------------+-----------------------+
+|           1 | Bloomsbury Publishing |
+|           2 | Secker & Warburg      |
+|           3 | HarperCollins         |
+|           4 | Collins Crime Club    |
+|           5 | The Russian Messenger |
++-------------+-----------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table book (
+    ->     bookid int primary key,
+    ->     title varchar(100),
+    ->     authorid int,
+    ->     publisherid int,
+    ->     foreign key (authorid) references author(authorid),
+    ->     foreign key (publisherid) references publisher(publisherid)
+    -> );
+ERROR 1050 (42S01): Table 'book' already exists
+mysql> create table books (
+    ->     title varchar(100),
+    ->     authorid int,
+    ->     publisherid int,
+    ->     foreign key (authorid) references author(authorid),
+    ->     foreign key (publisherid) references publisher(publisherid)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> insert into books(bookid, title, authorid, publisherid) values
+    -> (1, 'Harry Potter and the Philosopher\'s Stone', 1, 1),
+    ->   (2, '1984', 2, 2),
+    ->   (3, 'The Hobbit', 3, 3),
+    ->   (4, 'Murder on the Orient Express', 4, 4),
+    ->   (5, 'War and Peace', 5, 5);
+ERROR 1054 (42S22): Unknown column 'bookid' in 'field list'
+mysql> insert into books( title, authorid, publisherid) values
+    -> (1, 'Harry Potter and the Philosopher\'s Stone', 1, 1),
+    ->   (2, '1984', 2, 2),
+    ->   (3, 'The Hobbit', 3, 3),
+    ->   (4, 'Murder on the Orient Express', 4, 4),
+    ->   (5, 'War and Peace', 5, 5);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> alter table books add book_id int ;
+Query OK, 0 rows affected (0.38 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc books;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| title       | varchar(100) | YES  |     | NULL    |       |
+| authorid    | int          | YES  | MUL | NULL    |       |
+| publisherid | int          | YES  | MUL | NULL    |       |
+| book_id     | int          | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.11 sec)
+
+mysql> ALTER TABLE books
+    -> DROP COLUMN bookid;
+ERROR 1091 (42000): Can't DROP 'bookid'; check that column/key exists
+mysql> ALTER TABLE books
+    -> DROP COLUMN book_id;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book
+    -> ;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| bookid | int          | NO   | PRI | NULL    |       |
+| title  | varchar(100) | YES  |     | NULL    |       |
+| author | varchar(100) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO books(title, authorid, publisherid) VALUES
+    -> ('Harry Potter and the Philosopher\'s Stone', 1, 1),
+    -> ('1984', 2, 2),
+    -> ('The Hobbit', 3, 3),
+    -> ('Murder on the Orient Express', 4, 4),
+    -> ('War and Peace', 5, 5);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Marks WHERE Score > 80;
+ERROR 1146 (42S02): Table 'task_fsd.marks' doesn't exist
+mysql> show tables;
++--------------------+
+| Tables_in_task_fsd |
++--------------------+
+| author             |
+| book               |
+| books              |
+| course             |
+| loan               |
+| member             |
+| publisher          |
+| student            |
++--------------------+
+8 rows in set (0.03 sec)
+
+mysql> create table marks (
+    ->     id int auto_increment primary key,
+    ->     student_name varchar(100),
+    ->     score int
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc marks;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int          | NO   | PRI | NULL    | auto_increment |
+| student_name | varchar(100) | YES  |     | NULL    |                |
+| score        | int          | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT INTO Marks (student_name, score) VALUES
+    -> ('Arjun', 87),
+    -> ('Meera', 91),
+    -> ('Dev', 76),
+    -> ('Tanya', 89),
+    -> ('Ravi', 82);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++----+--------------+-------+
+| id | student_name | score |
++----+--------------+-------+
+|  1 | Arjun        |    87 |
+|  2 | Meera        |    91 |
+|  3 | Dev          |    76 |
+|  4 | Tanya        |    89 |
+|  5 | Ravi         |    82 |
++----+--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Marks WHERE Score > 80;
++----+--------------+-------+
+| id | student_name | score |
++----+--------------+-------+
+|  1 | Arjun        |    87 |
+|  2 | Meera        |    91 |
+|  4 | Tanya        |    89 |
+|  5 | Ravi         |    82 |
++----+--------------+-------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM Course ORDER BY Fee DESC;
++----------+-----------+---------+
+| courseid | title     | fee     |
++----------+-----------+---------+
+|      102 | Physics   | 6200.00 |
+|      104 | Biology   | 5800.00 |
+|      103 | Chemistry | 5500.00 |
+|      105 | English   | 5300.00 |
+|      101 | Math      | 5000.00 |
++----------+-----------+---------+
+5 rows in set (0.01 sec)
+
+mysql> select * from book where title like '%sql%';
++--------+------------+--------+
+| bookid | title      | author |
++--------+------------+--------+
+|      2 | SQL Basics | Kumar  |
++--------+------------+--------+
+1 row in set (0.01 sec)
+
+mysql> select courseid, count(*) as studentcount from registration group by courseid;
+ERROR 1146 (42S02): Table 'task_fsd.registration' doesn't exist
+mysql> CREATE TABLE registration (
+    ->   studentid INT,
+    ->   courseid  INT,
+    ->   regdate   DATE,
+    ->   PRIMARY KEY (studentid, courseid)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO registration (studentid, courseid, regdate) VALUES
+    ->   (1, 101, '2025-06-01'),
+    ->   (2, 102, '2025-06-02'),
+    ->   (3, 101, '2025-06-03'),
+    ->   (4, 103, '2025-06-04'),
+    ->   (5, 102, '2025-06-05');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from registration;
++-----------+----------+------------+
+| studentid | courseid | regdate    |
++-----------+----------+------------+
+|         1 |      101 | 2025-06-01 |
+|         2 |      102 | 2025-06-02 |
+|         3 |      101 | 2025-06-03 |
+|         4 |      103 | 2025-06-04 |
+|         5 |      102 | 2025-06-05 |
++-----------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select courseid, count(*) as studentcount from registration group by courseid;
++----------+--------------+
+| courseid | studentcount |
++----------+--------------+
+|      101 |            2 |
+|      102 |            2 |
+|      103 |            1 |
++----------+--------------+
+3 rows in set (0.01 sec)
+
+mysql> select departmentid, avg(salary) as avgsalary from employee group by departmentid;
+ERROR 1146 (42S02): Table 'task_fsd.employee' doesn't exist
+mysql> select max(price) as maxprice, min(price) as minprice from product;
+ERROR 1146 (42S02): Table 'task_fsd.product' doesn't exist
+mysql> CREATE TABLE employee (
+    ->   employeeid INT PRIMARY KEY,
+    ->   departmentid INT,
+    ->   salary DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO employee (employeeid, departmentid, salary) VALUES
+    ->   (1, 10, 50000.00),
+    ->   (2, 20, 62000.50),
+    ->   (3, 10, 54000.75),
+    ->   (4, 30, 71000.00),
+    ->   (5, 20, 65800.25);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++------------+--------------+----------+
+| employeeid | departmentid | salary   |
++------------+--------------+----------+
+|          1 |           10 | 50000.00 |
+|          2 |           20 | 62000.50 |
+|          3 |           10 | 54000.75 |
+|          4 |           30 | 71000.00 |
+|          5 |           20 | 65800.25 |
++------------+--------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE product (
+    ->   productid INT PRIMARY KEY,
+    ->   price DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO product (productid, price) VALUES
+    ->   (1, 19.99),
+    ->   (2, 49.50),
+    ->   (3, 5.25),
+    ->   (4, 120.00),
+    ->   (5, 250.75);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from product;
++-----------+--------+
+| productid | price  |
++-----------+--------+
+|         1 |  19.99 |
+|         2 |  49.50 |
+|         3 |   5.25 |
+|         4 | 120.00 |
+|         5 | 250.75 |
++-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DepartmentID, AVG(Salary) AS AvgSalary FROM Employee GROUP BY DepartmentID;
++--------------+--------------+
+| DepartmentID | AvgSalary    |
++--------------+--------------+
+|           10 | 52000.375000 |
+|           20 | 63900.375000 |
+|           30 | 71000.000000 |
++--------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT MAX(Price) AS MaxPrice, MIN(Price) AS MinPrice FROM Product;
++----------+----------+
+| MaxPrice | MinPrice |
++----------+----------+
+|   250.75 |     5.25 |
++----------+----------+
+1 row in set (0.01 sec)
+
+mysql> select s.studentid, s.name, m.score 
+    -> from student s
+    -> join marks m on s.studentid = m.studentid;
+ERROR 1054 (42S22): Unknown column 'm.studentid' in 'on clause'
+mysql> 
+mysql> alter table marks add column studentid int;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into marks (studentid, student_name, score) values
+    -> ('Arjun', 87),
+    ->  ('Meera', 91),
+    ->  ('Dev', 76),
+    ->  ('Tanya', 89),
+    ->  ('Ravi', 82);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into marks (studentid, student_name, score) values
+    -> (1,'Arjun', 87),
+    -> (2,'Meera', 91),
+    -> (3,'Dev', 76),
+    -> (4,'Tanya', 89),
+    -> (5,'Ravi', 82);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++----+--------------+-------+-----------+
+| id | student_name | score | studentid |
++----+--------------+-------+-----------+
+|  1 | Arjun        |    87 |      NULL |
+|  2 | Meera        |    91 |      NULL |
+|  3 | Dev          |    76 |      NULL |
+|  4 | Tanya        |    89 |      NULL |
+|  5 | Ravi         |    82 |      NULL |
+|  6 | Arjun        |    87 |         1 |
+|  7 | Meera        |    91 |         2 |
+|  8 | Dev          |    76 |         3 |
+|  9 | Tanya        |    89 |         4 |
+| 10 | Ravi         |    82 |         5 |
++----+--------------+-------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select s.studentid, s.name, m.score
+    -> from student s
+    -> join marks m on s.studentid = m.studentid;
++-----------+-------+-------+
+| studentid | name  | score |
++-----------+-------+-------+
+|         1 | Asha  |    87 |
+|         2 | Ravi  |    91 |
+|         3 | Mina  |    76 |
+|         4 | Karan |    89 |
+|         5 | Lata  |    82 |
++-----------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> -- Sub-query to find top performer
+mysql> SELECT * FROM Marks 
+    -> WHERE Score = (SELECT MAX(Score) FROM Marks);
++----+--------------+-------+-----------+
+| id | student_name | score | studentid |
++----+--------------+-------+-----------+
+|  2 | Meera        |    91 |      NULL |
+|  7 | Meera        |    91 |         2 |
++----+--------------+-------+-----------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT o.OrderID, c.Name 
+    -> FROM Orders o
+    -> JOIN Customers c ON o.CustomerID = c.CustomerID;
+ERROR 1146 (42S02): Table 'task_fsd.orders' doesn't exist
+mysql> show tables;
++--------------------+
+| Tables_in_task_fsd |
++--------------------+
+| author             |
+| book               |
+| books              |
+| course             |
+| employee           |
+| loan               |
+| marks              |
+| member             |
+| product            |
+| publisher          |
+| registration       |
+| student            |
++--------------------+
+12 rows in set (0.01 sec)
+
+mysql> CREATE TABLE orders (
+    ->   orderid INT PRIMARY KEY,
+    ->   customerid INT,
+    ->   orderdate DATE
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> INSERT INTO orders (orderid, customerid, orderdate) VALUES
+    ->   (1, 101, '2025-06-01'),
+    ->   (2, 102, '2025-06-02'),
+    ->   (3, 103, '2025-06-03'),
+    ->   (4, 104, '2025-06-04'),
+    ->   (5, 105, '2025-06-05');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders;
++---------+------------+------------+
+| orderid | customerid | orderdate  |
++---------+------------+------------+
+|       1 |        101 | 2025-06-01 |
+|       2 |        102 | 2025-06-02 |
+|       3 |        103 | 2025-06-03 |
+|       4 |        104 | 2025-06-04 |
+|       5 |        105 | 2025-06-05 |
++---------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT o.orderid, c.name
+    -> FROM orders o
+    -> JOIN customers c ON o.customerid = c.customerid;
+ERROR 1146 (42S02): Table 'task_fsd.customers' doesn't exist
+mysql> CREATE TABLE customers (
+    ->   customerid INT PRIMARY KEY,
+    ->   name VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO customers (customerid, name) VALUES(101,'suba'),(102,'adhi'),(103,'bharth')(104,'kumar')(105,'magesh');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(104,'kumar')(105,'magesh')' at line 1
+mysql> INSERT INTO customers (customerid, name) VALUES
+    ->   (101, 'suba'),
+    ->   (102, 'adhi'),
+    ->   (103, 'bharth'),
+    ->   (104, 'kumar'),
+    ->   (105, 'magesh');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from customers;
++------------+--------+
+| customerid | name   |
++------------+--------+
+|        101 | suba   |
+|        102 | adhi   |
+|        103 | bharth |
+|        104 | kumar  |
+|        105 | magesh |
++------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT o.orderid, c.name
+    -> FROM orders o
+    -> JOIN customers c ON o.customerid = c.customerid;
++---------+--------+
+| orderid | name   |
++---------+--------+
+|       1 | suba   |
+|       2 | adhi   |
+|       3 | bharth |
+|       4 | kumar  |
+|       5 | magesh |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select d.departmentname, s.name, m.score
+    -> from department d
+    -> join course c on d.departmentid = c.departmentid
+    -> join registration r on c.courseid = r.courseid
+    -> join student s on r.studentid = s.studentid
+    -> join marks m on s.studentid = m.studentid;
+ERROR 1146 (42S02): Table 'task_fsd.department' doesn't exist
+mysql> CREATE TABLE department (
+    ->   departmentid INT PRIMARY KEY,
+    ->   departmentname VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO department (departmentid, departmentname) VALUES
+    ->   (1, 'Computer Science'),
+    ->   (2, 'Mathematics'),
+    ->   (3, 'Physics');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from department;
++--------------+------------------+
+| departmentid | departmentname   |
++--------------+------------------+
+|            1 | Computer Science |
+|            2 | Mathematics      |
+|            3 | Physics          |
++--------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT d.departmentname, s.name, m.score
+    -> FROM department d
+    -> JOIN course c ON d.departmentid = c.departmentid
+    -> JOIN registration r ON c.courseid = r.courseid
+    -> JOIN student s ON r.studentid = s.studentid
+    -> JOIN marks m ON s.studentid = m.studentid;
+ERROR 1054 (42S22): Unknown column 'c.departmentid' in 'on clause'
+mysql> SHOW COLUMNS FROM course;
++----------+---------------+------+-----+---------+-------+
+| Field    | Type          | Null | Key | Default | Extra |
++----------+---------------+------+-----+---------+-------+
+| courseid | int           | NO   | PRI | NULL    |       |
+| title    | varchar(100)  | YES  |     | NULL    |       |
+| fee      | decimal(10,2) | YES  |     | NULL    |       |
++----------+---------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE course
+    -> ADD COLUMN departmentid INT;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc course;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| courseid     | int           | NO   | PRI | NULL    |       |
+| title        | varchar(100)  | YES  |     | NULL    |       |
+| fee          | decimal(10,2) | YES  |     | NULL    |       |
+| departmentid | int           | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select 8 from course;
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
++---+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO course (courseid, title, credits, departmentid) VALUES
+    ->   (1001, 'English', 60, 201),
+    ->   (1002, 'Math', 50, 202),
+    ->   (1003, 'Physics', 60, 202),
+    ->   (1004, 'SQL', 40, 203),
+    ->   (1005, 'Docker', 30, 203),
+    ->   (1006, 'K8S', 30, 203),
+    ->   (1007, 'AWS', 35, 203),
+    ->   (1008, 'Python', 40, 203),
+    ->   (1009, 'Git', 20, 203),
+    ->   (1010, 'Mongo', 45, 203);
+ERROR 1054 (42S22): Unknown column 'credits' in 'field list'
+mysql> DROP TABLE course;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> CREATE TABLE course (
+    ->   courseid INT PRIMARY KEY,
+    ->   title VARCHAR(255),
+    ->   credits INT,
+    ->   departmentid INT
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO course (courseid, title, credits, departmentid) VALUES
+    ->   (1001, 'English', 60, 201),
+    ->   (1002, 'Math', 50, 202),
+    ->   (1003, 'Physics', 60, 202),
+    ->   (1004, 'SQL', 40, 203),
+    ->   (1005, 'Docker', 30, 203),
+    ->   (1006, 'K8S', 30, 203),
+    ->   (1007, 'AWS', 35, 203),
+    ->   (1008, 'Python', 40, 203),
+    ->   (1009, 'Git', 20, 203),
+    ->   (1010, 'Mongo', 45, 203);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from course;
++----------+---------+---------+--------------+
+| courseid | title   | credits | departmentid |
++----------+---------+---------+--------------+
+|     1001 | English |      60 |          201 |
+|     1002 | Math    |      50 |          202 |
+|     1003 | Physics |      60 |          202 |
+|     1004 | SQL     |      40 |          203 |
+|     1005 | Docker  |      30 |          203 |
+|     1006 | K8S     |      30 |          203 |
+|     1007 | AWS     |      35 |          203 |
+|     1008 | Python  |      40 |          203 |
+|     1009 | Git     |      20 |          203 |
+|     1010 | Mongo   |      45 |          203 |
++----------+---------+---------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT 
+    ->   LOWER(d.DepartmentName) AS department_name,
+    ->   LOWER(s.Name) AS student_name,
+    ->   m.Score
+    -> FROM Department d
+    -> JOIN Course c ON d.DepartmentID = c.DepartmentID
+    -> JOIN Registration r ON c.CourseID = r.CourseID
+    -> JOIN Student s ON r.StudentID = s.StudentID
+    -> JOIN Marks m ON s.StudentID = m.StudentID;
+Empty set (0.01 sec)
+
+mysql> SELECT d.DepartmentName, s.Name, m.Score
+    -> FROM Department d
+    -> JOIN Course c ON d.DepartmentID = c.DepartmentID
+    -> JOIN Registration r ON c.CourseID = r.CourseID
+    -> JOIN Student s ON r.StudentID = s.StudentID
+    -> JOIN Marks m ON s.StudentID = m.StudentID;
+Empty set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
